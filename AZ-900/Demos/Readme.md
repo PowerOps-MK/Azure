@@ -2,7 +2,7 @@
 Demos that can be done via the Azure portal
 
 # Prerequisites
-* Resourcegroup
+* Resourcegroup **RG-AZ900-Portal**
 
 ## Table of contents
 * [Virtual Network](#virtual-network)
