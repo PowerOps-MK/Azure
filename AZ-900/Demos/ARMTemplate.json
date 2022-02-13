@@ -3,16 +3,19 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "type": "string"
+            "type": "LB-AZ900"
+        },
+        "pipName": {
+            "type": "PIP-AZ900"
         },
         "location": {
-            "type": "string"
+            "type": "westeurope"
         },
         "sku": {
-            "type": "string"
+            "type": "Basic"
         },
         "tier": {
-            "type": "string"
+            "type": "Regional"
         }
     },
     "resources": [
@@ -22,16 +25,16 @@
             "type": "Microsoft.Network/loadBalancers",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "Microsoft.Network/publicIPAddresses/Teat"
+                "Microsoft.Network/publicIPAddresses/PIP-AZ900"
             ],
             "tags": {},
             "properties": {
                 "frontendIPConfigurations": [
                     {
-                        "name": "Twst",
+                        "name": "Frontend",
                         "properties": {
                             "publicIPAddress": {
-                                "id": "/subscriptions/7e129c5b-60b5-4d1c-9cc6-88faa51d907b/resourceGroups/Test/providers/Microsoft.Network/publicIPAddresses/Teat"
+                                "id": "/subscriptions/7e129c5b-60b5-4d1c-9cc6-88faa51d907b/resourceGroups/RG-AZ900-Portal/providers/Microsoft.Network/publicIPAddresses/PIP-AZ900"
                             }
                         }
                     }
@@ -50,12 +53,12 @@
         {
             "apiVersion": "2020-08-01",
             "type": "Microsoft.Network/publicIpAddresses",
-            "name": "Teat",
+            "name": "[parameters('pipName')]",
             "location": "[parameters('location')]",
             "dependsOn": [],
             "properties": {
                 "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Static",
+                "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4
             },
             "sku": {
