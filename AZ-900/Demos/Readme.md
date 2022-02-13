@@ -23,7 +23,6 @@ Create a VNet via the portal:
     | Name | **VNet-AZ900** |
     | Region | **West Europe** |
    
-
 6. Review the resource
 7. Create the resource
 
