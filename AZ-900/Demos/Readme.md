@@ -2,6 +2,7 @@
 
 ## Table of contents
 * [Virtual Network] (#virtual-network)
+* [General info](#general-info)
 
 ## Virtual Network
 Create a Vnet via the portal
