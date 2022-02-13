@@ -25,7 +25,7 @@
             "type": "Microsoft.Network/loadBalancers",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "Microsoft.Network/publicIPAddresses/PIP-AZ900"
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pipName'))]"
             ],
             "tags": {},
             "properties": {
@@ -34,7 +34,7 @@
                         "name": "Frontend",
                         "properties": {
                             "publicIPAddress": {
-                                "id": "/subscriptions/7e129c5b-60b5-4d1c-9cc6-88faa51d907b/resourceGroups/RG-AZ900-Portal/providers/Microsoft.Network/publicIPAddresses/PIP-AZ900"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pipName'))]"
                             }
                         }
                     }
