@@ -1,9 +1,3 @@
----
-wts:
-    title: '09 - Create a VM with a Template (10 min)'
-    module: 'Module 03: Describe core solutions and management tools'
----
-
 # Azure portal demos
 Demos that can be done via the Azure portal
 
@@ -19,15 +13,10 @@ Create a VNet via the portal:
 4. Create a **Virtual Network** 
 5. Add settings to the resource 
 
-| Setting| Value|
+    | Setting| Value|
     |----|----|
     | Subscription | **Keep default supplied**|
-    | Resource group | **Create new resource group** |
-    | Region | Keep default |
-    | Admin username | **azureuser** |
-    | Admin password | **Pa$$w0rd1234** |
-    | DNS label prefix | **myvmtemplatexxxx** |
-    | OS version | **2019-Datacenter** |
+   
 
 6. Review the resource
 7. Create the resource
