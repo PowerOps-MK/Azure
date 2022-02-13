@@ -1,4 +1,5 @@
 # Azure portal demos
+Demos that can be done via the Azure portal
 
 ## Table of contents
 * [Virtual Network](#virtual-network)
