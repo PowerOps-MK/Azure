@@ -1,1 +1,67 @@
-
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "sku": {
+            "type": "string"
+        },
+        "tier": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2021-02-01",
+            "name": "[parameters('name')]",
+            "type": "Microsoft.Network/loadBalancers",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "Microsoft.Network/publicIPAddresses/Teat"
+            ],
+            "tags": {},
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "Twst",
+                        "properties": {
+                            "publicIPAddress": {
+                                "id": "/subscriptions/7e129c5b-60b5-4d1c-9cc6-88faa51d907b/resourceGroups/Test/providers/Microsoft.Network/publicIPAddresses/Teat"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [],
+                "probes": [],
+                "loadBalancingRules": [],
+                "inboundNatRules": [],
+                "outboundRules": []
+            },
+            "sku": {
+                "name": "[parameters('sku')]",
+                "tier": "[parameters('tier')]"
+            }
+        },
+        {
+            "apiVersion": "2020-08-01",
+            "type": "Microsoft.Network/publicIpAddresses",
+            "name": "Teat",
+            "location": "[parameters('location')]",
+            "dependsOn": [],
+            "properties": {
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Static",
+                "idleTimeoutInMinutes": 4
+            },
+            "sku": {
+                "name": "[parameters('sku')]",
+                "tier": "[parameters('tier')]"
+            }
+        }
+    ]
+}
