@@ -1,7 +1,7 @@
 # Azure portal demos
 
 ## Table of contents
-* [Virtual Network]
+* [Virtual Network] (#virtual-network)
 
 ## Virtual Network
 Create a Vnet via the portal
