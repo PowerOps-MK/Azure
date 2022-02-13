@@ -35,10 +35,10 @@ Create a lock via the portal:
 2. Navigate to the resourcegroup
 3. Add **lock** via settings
 4. Add settings to the **lock**
+
     | Setting | Value |
     | -- | -- |
     | Name | **RGLock** |
     | Type | **Delete** |
-    | | |  
 
 5. Create the **lock**
