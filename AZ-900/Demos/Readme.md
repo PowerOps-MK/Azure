@@ -1,6 +1,9 @@
 # Azure portal demos
 Demos that can be done via the Azure portal
 
+# Prerequisites
+* Resourcegroup
+
 ## Table of contents
 * [Virtual Network](#virtual-network)
 
