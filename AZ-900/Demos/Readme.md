@@ -6,11 +6,11 @@ Demos that can be done via the Azure portal
 
 ## Table of contents
 * [Virtual Network](#virtual-network)
-* [Locks](#locks)
-
+* [Lock](#lock)
+* [Policy](#policy)
 
 ## Virtual Network
-Create a VNet via the portal:
+Create a Azure VNet:
 
 1. Login via [Azure portal](https://portal.azure.com/)
 2. Create a new resource
@@ -28,8 +28,23 @@ Create a VNet via the portal:
 6. Review the resource
 7. Create the resource
 
-## Locks
-Create a lock via the portal:
+## Lock
+Create a Azure lock:
+
+1. Login via [Azure portal](https://portal.azure.com/)
+2. Navigate to the resourcegroup
+3. Add **lock** via settings
+4. Add settings to the **lock**
+
+    | Setting | Value |
+    | -- | -- |
+    | Name | **RGLock** |
+    | Type | **Delete** |
+
+5. Create the **lock**
+
+##Policy
+Create a Azure policy:
 
 1. Login via [Azure portal](https://portal.azure.com/)
 2. Navigate to the resourcegroup
