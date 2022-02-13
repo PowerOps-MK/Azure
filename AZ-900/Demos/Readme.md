@@ -13,9 +13,12 @@ Create a VNet via the portal:
 4. Create a **Virtual Network** 
 5. Add settings to the resource 
 
-    | Setting| Value|
-    |----|----|
-    | Subscription | **Keep default supplied**|
+    | Setting | Value | 
+    | --- | --- |
+    | Subscription | **Leave default provided** |
+    | Resource Group | **RG-AZ900-Portal** |
+    | Name | **VNet-AZ900** |
+    | Region | **West Europe** |
    
 
 6. Review the resource
