@@ -5,12 +5,12 @@ Install-Module az -Scope AllUsers -Force
 Connect-AzAccount
 
 # Create new resourcegroup
-New-AzResourceGroup -Name "RG-AZ900" -Location "westeurope"
+New-AzResourceGroup -Name "RG-AZ900-Posh" -Location "westeurope"
 
 # Create a public ip
 $ip = @{
     Name = "PIP-AZ900"
-    ResourceGroupName = "RG-AZ900"
+    ResourceGroupName = "RG-AZ900-Posh"
     Location = "westeurope"
     Sku = "Basic"
     AllocationMethod = "Dynamic"
