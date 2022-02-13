@@ -10,7 +10,7 @@ Demos that can be done via the Azure portal
 * [Policy](#policy)
 
 ## Virtual Network
-Create a Azure VNet:
+Create an Azure VNet:
 
 1. Login via [Azure portal](https://portal.azure.com/)
 2. Create a new resource
@@ -29,7 +29,7 @@ Create a Azure VNet:
 7. Create the resource
 
 ## Lock
-Create a Azure lock:
+Create an Azure lock:
 
 1. Login via [Azure portal](https://portal.azure.com/)
 2. Navigate to the resourcegroup
@@ -44,7 +44,7 @@ Create a Azure lock:
 5. Create the **lock**
 
 ## Policy
-Create a Azure policy:
+Create an Azure policy:
 
 1. Login via [Azure portal](https://portal.azure.com/)
 2. Navigate to the resourcegroup
