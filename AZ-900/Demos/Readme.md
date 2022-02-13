@@ -43,7 +43,7 @@ Create a Azure lock:
 
 5. Create the **lock**
 
-##Policy
+## Policy
 Create a Azure policy:
 
 1. Login via [Azure portal](https://portal.azure.com/)
