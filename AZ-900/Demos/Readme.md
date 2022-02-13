@@ -1,6 +1,12 @@
 # Azure portal demos
 Demos that can be done via the Azure portal
 
+---
+wts:
+    title: '09 - Create a VM with a Template (10 min)'
+    module: 'Module 03: Describe core solutions and management tools'
+---
+
 ## Table of contents
 * [Virtual Network](#virtual-network)
 
