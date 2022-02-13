@@ -8,7 +8,7 @@ Demos that can be done via the Azure portal
 Create a VNet via the portal:
 
 ```
-1. Login via https://portal.azure.com
+1. Login via [Azure portal](https://portal.azure.com/)
 2. Create a new resource
 3. Search "Virtual Network"
 4. Create a Virtual Network 
