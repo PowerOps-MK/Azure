@@ -1,6 +1,5 @@
 # Create resourcegroup for CLI en ARM
 az group create --name "RG-AZ900-CLI" --location "westeurope"
-
 az group create --name "RG-AZ900-ARM" --location "westeurope"
 
 # List resourcegroups
