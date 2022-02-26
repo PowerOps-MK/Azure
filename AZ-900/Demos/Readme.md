@@ -10,8 +10,8 @@ More demo's can be found on [Microsoft Learning](https://github.com/MicrosoftLea
 * [Lock](#lock)
 * [Policy](#policy)
 * [RBAC](#RBAC)
-* [Key Vault](#Key Vault)
-* [Pricing Calculator](#Pricing Calculator)
+* [Key Vault](#Key_Vault)
+* [Pricing Calculator](#Pricing_Calculator)
 
 ## Virtual Network
 Create an Azure VNet:
