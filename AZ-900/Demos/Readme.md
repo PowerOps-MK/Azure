@@ -11,6 +11,7 @@ More demo's can be found on [Microsoft Learning](https://github.com/MicrosoftLea
 * [Policy](#policy)
 * [RBAC](#RBAC)
 * [Key Vault](#Key_Vault)
+* [Support ticket](#Support_ticket)
 * [Pricing Calculator](#Pricing_Calculator)
 * [TCO Calculator](#TCO_Calculator)
 * [Composite SLAs](#Composite_SLAs)
@@ -98,6 +99,27 @@ Create an Azure Key Vault:
    
 6. Review the resource
 7. Create the resource
+
+## Support_ticket
+Create a support ticket:
+
+1. Login via [Azure portal](https://portal.azure.com/)
+2. Navigate to **All services**
+3. Search for **Help + support**
+4. Click **+ New support request**
+5. Add the following settings
+
+    | Setting | Value|
+    |----|--------|
+    | Issue Type| **Billing** |
+    | Subscription | **Choose your subscription** |
+    | Summary | **Monthly charge is not correct** |
+    | Problem type | **Pricing** |
+    | Problem subtype | **Help me discover the service prices** |    
+
+6. Click **Next: Solutions**
+7. Click **Next: Details**
+**Note:** STOP at this point
 
 ## Pricing_Calculator
 Use the Azure Pricing Calculator:
