@@ -8,6 +8,7 @@ Demos that can be done via the Azure portal
 * [Virtual Network](#virtual-network)
 * [Lock](#lock)
 * [Policy](#policy)
+* [RBAC](#RBAC)
 
 ## Virtual Network
 Create an Azure VNet:
@@ -57,3 +58,14 @@ Create an Azure policy:
     | Scope| **Use default selected**|
     | Policy definition | search **Allowed Locations** |
     | Assignment Name | **Allowed Locations** |
+
+## RBAC
+Assign an RBAC role:
+
+1. Login via [Azure portal](https://portal.azure.com/)
+2. Navigate to the resourcegroup
+3. Click on **Access control (IAM)**
+4. Click **+ Add** and then click **Add role assignment**
+5. Search for the **Virtual Machine Contributor** role
+6. Select the members
+7. Review the assignment
