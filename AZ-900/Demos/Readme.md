@@ -1,5 +1,6 @@
 # Azure portal demos
-Demos that can be done via the Azure portal
+Demos that can be done via the Azure portal.
+More demo's can be found on [Microsoft Learning](https://github.com/MicrosoftLearning/AZ-900T0x-MicrosoftAzureFundamentals/tree/master/Instructions/Walkthroughs)
 
 # Prerequisites
 * Resourcegroup **RG-AZ900-Portal**
