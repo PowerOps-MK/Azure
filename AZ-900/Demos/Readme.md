@@ -137,7 +137,7 @@ Use the Azure TCO Calculator:
 Calculate Composite SLAs:
 1. Browse to the [SLA summary for Azure](https://azure.microsoft.com/en-us/support/legal/sla/summary/)
 2. Locate the **App Service** SLA uptime value, **99.95%**
-3. Locate the **Azure Active Directory B2C** service and determine the SLA uptime value, **99.9%**
+3. Locate the **Azure Active Directory B2C** uptime value, **99.9%**
 4. Locate the **Application Gateway** SLA uptime value, **99.95%**
 5. Locate the **Azure SQL Database** SLA uptime value, **99.99%**
 6. **App Service % uptime** X **Azure AD B2C % uptime** X  **Azure Application Gateway % uptime** X **Azure SQL Database % uptime** = **Total % Uptime**
