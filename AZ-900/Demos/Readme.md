@@ -125,6 +125,6 @@ Use the Azure Pricing Calculator:
     | West Europe | 50 GB |
 
 6. Scroll to the bottom of the Azure Pricing Calculator webpage
-7. Change the currency to Euro
+7. Change the currency to **Euro**
 8. Review the total **Estimated monthly cost**
 
