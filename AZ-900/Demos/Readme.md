@@ -10,8 +10,8 @@ More demo's can be found on [Microsoft Learning](https://github.com/MicrosoftLea
 * [Lock](#lock)
 * [Policy](#policy)
 * [RBAC](#RBAC)
-* [Key Vault](#KV)
-* [Pricing Calculator](#PC)
+* [Key Vault](#Key Vault)
+* [Pricing Calculator](#Pricing Calculator)
 
 ## Virtual Network
 Create an Azure VNet:
@@ -101,7 +101,7 @@ Create an Azure Key Vault:
 Use the Azure Pricing Calculator:
 
 1. Browse to the [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)
-2. Create a new resource
+2. Click **Virtual Machines** on the **Products** 
 3. Search **Key Vault**
 4. Create a **Key Vault** 
 5. Add settings to the resource 
