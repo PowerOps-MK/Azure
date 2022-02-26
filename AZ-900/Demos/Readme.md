@@ -130,3 +130,8 @@ Use the Azure Pricing Calculator:
 7. Change the currency to **Euro**
 8. Review the total **Estimated monthly cost**
 
+## TCO_Calculator
+Use the Azure TCO Calculator:
+
+## Composite_SLAs
+Calculate Composite SLAs:
