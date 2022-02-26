@@ -131,7 +131,8 @@ Use the Azure Pricing Calculator:
 8. Review the total **Estimated monthly cost**
 
 ## TCO_Calculator
-Use the Azure TCO Calculator:
+Use the Azure Total Cost of Ownership (TCO) Calculator:
+1. Browse to the [TCO Calculator](https://azure.microsoft.com/en-us/pricing/tco/calculator/)
 
 ## Composite_SLAs
 Calculate Composite SLAs:
