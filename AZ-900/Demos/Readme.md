@@ -114,6 +114,8 @@ Add a tag:
     | Name | **Cost** |
     | Value | **Tag-AZ900** |
 
+5. Click **Apply**
+
 ## Support_ticket
 Create a support ticket:
 
