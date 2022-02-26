@@ -119,7 +119,8 @@ Create a support ticket:
 
 6. Click **Next: Solutions**
 7. Click **Next: Details**
-**Note:** STOP at this point
+
+    **Note:** STOP at this point
 
 ## Pricing_Calculator
 Use the Azure Pricing Calculator:
