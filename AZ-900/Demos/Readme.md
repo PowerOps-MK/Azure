@@ -47,4 +47,13 @@ Create an Azure lock:
 Create an Azure policy:
 
 1. Login via [Azure portal](https://portal.azure.com/)
-2. 
+2. Navigate to **All services**
+3. Select **Policy**
+4. Click **Assignments**
+5. Click **Assign Policy**
+
+    | Setting | Value | 
+    | --- | --- |
+    | Scope| **Use default selected**|
+    | Policy definition | search **Allowed Locations** |
+    | Assignment Name | **Allowed Locations** |
