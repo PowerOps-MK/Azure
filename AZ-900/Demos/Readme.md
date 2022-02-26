@@ -10,6 +10,7 @@ More demo's can be found on [Microsoft Learning](https://github.com/MicrosoftLea
 * [Lock](#lock)
 * [Policy](#policy)
 * [RBAC](#RBAC)
+* [Key Vault](#KV)
 
 ## Virtual Network
 Create an Azure VNet:
@@ -74,3 +75,23 @@ Assign an RBAC role:
     | Members | select members |
 
 5. Review the assignment
+
+## Key Vault
+Create an Azure Key Vault:
+
+1. Login via [Azure portal](https://portal.azure.com/)
+2. Create a new resource
+3. Search **Key Vault**
+4. Create a **Key Vault** 
+5. Add settings to the resource 
+    
+    | Setting | Value | 
+    | --- | --- |
+    | Subscription | **Leave default provided** |
+    | Resource Group | **RG-AZ900-Portal** |
+    | Name | **KVxxx-AZ900** |
+    | Region | **West Europe** |
+    | Price tier | **Standard** |
+   
+6. Review the resource
+7. Create the resource
