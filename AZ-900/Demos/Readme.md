@@ -133,6 +133,41 @@ Use the Azure Pricing Calculator:
 ## TCO_Calculator
 Use the Azure Total Cost of Ownership (TCO) Calculator:
 1. Browse to the [TCO Calculator](https://azure.microsoft.com/en-us/pricing/tco/calculator/)
+2. Click **+ Add server workload**
+3. Add settings to the **workload**
+
+    | Settings | Value |
+    | -- | -- |
+    | Name | **Servers: Windows VMs** |
+    | Workload | **Windows/Linux server** |
+    | Environment | **Virtual Machines** |
+    | Operating system | **Windows** |  
+    | VMs | **50** |
+    | Virtualization | **Hyper-V** |
+    | Core(s) | **8**|
+    | RAM (GB) | **16** |
+    | Optimize by | **CPU** |
+    | Windows Server 2008/2008 R2 | **Off** |
+
+4. Click **Next**
+5. In the **Storage** pane, click **Add storage**.
+
+    | Settings | Value |
+    | -- | -- |
+    | Name | **Server Storage** |
+    | Storage type | **Local Disk/SAN** |
+    | Disk type | **HDD** |
+    | Capacity | **60 TB** |  
+    | Backup | **120 TB** |
+    | Archive | **0 TB** |
+
+6. Click **Next**
+7. Review the Azure cost saving recommendations and visualizations
+
+    | Settings | Value |
+    | -- | -- |
+    | Timeframe| **3 years** |
+    | Region | **West Europe** |
 
 ## Composite_SLAs
 Calculate Composite SLAs:
