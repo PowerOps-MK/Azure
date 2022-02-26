@@ -12,6 +12,8 @@ More demo's can be found on [Microsoft Learning](https://github.com/MicrosoftLea
 * [RBAC](#RBAC)
 * [Key Vault](#Key_Vault)
 * [Pricing Calculator](#Pricing_Calculator)
+* [TCO Calculator](#TCO_Calculator)
+* [Composite SLAs](#Composite_SLAs)
 
 ## Virtual Network
 Create an Azure VNet:
