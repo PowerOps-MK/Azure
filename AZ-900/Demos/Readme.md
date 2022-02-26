@@ -77,7 +77,7 @@ Assign an RBAC role:
 
 5. Review the assignment
 
-## Key Vault
+## Key_Vault
 Create an Azure Key Vault:
 
 1. Login via [Azure portal](https://portal.azure.com/)
@@ -97,22 +97,29 @@ Create an Azure Key Vault:
 6. Review the resource
 7. Create the resource
 
-## Pricing Calculator
+## Pricing_Calculator
 Use the Azure Pricing Calculator:
 
 1. Browse to the [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)
 2. Click **Virtual Machines** on the **Products** 
-3. Search **Key Vault**
-4. Create a **Key Vault** 
-5. Add settings to the resource 
-    
-    | Setting | Value | 
-    | --- | --- |
-    | Subscription | **Leave default provided** |
-    | Resource Group | **RG-AZ900-Portal** |
-    | Name | **KVxxx-AZ900** |
+3. Modify the default VM settings
+
+    | Settings | Value |
+    | -- | -- |
     | Region | **West Europe** |
-    | Price tier | **Standard** |
-   
-6. Review the resource
-7. Create the resource
+    | Operating System | **Windows** |
+    | Type | **(OS only)** |
+    | Tier | **Standard** |  
+    | Instance | **A2: 2 Core(s), 3.5 GB RAM, 135 GB Temporary storage** |
+
+4. Modify the default storage settings
+
+    | Tier | Disk size | Number of disks | Snapshot | Storage transactions |
+    | ---- | --------- | --------------- | -------- | -------------------- |
+    | Standard HDD | S30: 1024 GiB | 1 | Off | 10,000 |
+
+5. Modify the default network settings
+
+    | Region | Zone 1 Outbound Data Transfer Amount |
+    | ------ | -------------------------------------- |
+    | West Europe | 50 GB |
