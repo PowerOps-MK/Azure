@@ -11,6 +11,7 @@ More demo's can be found on [Microsoft Learning](https://github.com/MicrosoftLea
 * [Policy](#policy)
 * [RBAC](#RBAC)
 * [Key Vault](#Key_Vault)
+* [Tags](#Tags)
 * [Support ticket](#Support_ticket)
 * [Pricing Calculator](#Pricing_Calculator)
 * [TCO Calculator](#TCO_Calculator)
@@ -99,6 +100,19 @@ Create an Azure Key Vault:
    
 6. Review the resource
 7. Create the resource
+
+## Tags
+Add a tag:
+
+1. Login via [Azure portal](https://portal.azure.com/)
+2. Navigate to the resourcegroup
+3. Click on **Tags**
+4. Add settings for a tag
+
+    | Setting | Value | 
+    | --- | --- |
+    | Name | **Cost** |
+    | Value | **Tag-AZ900** |
 
 ## Support_ticket
 Create a support ticket:
