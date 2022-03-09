@@ -3,19 +3,24 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "name": {
-            "type": "LB-AZ900"
+            "type": "string",
+            "defaultValue": "LB-AZ900"
         },
         "pipName": {
-            "type": "PIP-AZ900"
+            "type": "string",
+            "defaultValue": "PIP-AZ900"
         },
         "location": {
-            "type": "westeurope"
+            "type": "string",
+            "defaultValue": "westeurope"
         },
         "sku": {
-            "type": "Basic"
+            "type": "string",
+            "defaultValue": "basic"
         },
         "tier": {
-            "type": "Regional"
+            "type": "string",
+            "defaultValue": "Regional"
         }
     },
     "resources": [
