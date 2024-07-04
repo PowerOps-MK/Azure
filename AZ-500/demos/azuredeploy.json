@@ -9,14 +9,28 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },  
-    "vnetPeerName": {
+    "vnetGWName": {
       "type": "string",
-      "defaultValue": "[format('vnetPeer{0}', uniqueString(resourceGroup().id))]",
+      "defaultValue": "[format('vnetGW{0}', uniqueString(resourceGroup().id))]",
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
     },
-    "ipName": {
+    "ipGWName": {
+      "type": "string",
+      "defaultValue": "[format('IP{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
+    "vnetBastionName": {
+      "type": "string",
+      "defaultValue": "[format('vnetBastion{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
+    "ipBastionName": {
       "type": "string",
       "defaultValue": "[format('IP{0}', uniqueString(resourceGroup().id))]",
       "metadata": {
@@ -60,7 +74,7 @@
     {
       "type": "Microsoft.Network/virtualNetworks",
 	  "apiVersion": "2023-04-01",
-      "name": "[parameters('vnetPeerName')]",
+      "name": "[parameters('vnetGWName')]",
       "location": "[parameters('location')]",
       "properties": {
 	    "addressSpace": {
@@ -73,18 +87,42 @@
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-04-01",
-      "name": "[concat(parameters('vnetPeerName'), '/subnetB')]",
+      "name": "[concat(parameters('vnetGWName'), '/subnetGW')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetPeerName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
       ],
       "properties": {
         "addressPrefix": "10.20.0.0/24"
       }
     },	
     {
+      "type": "Microsoft.Network/virtualNetworks",
+	  "apiVersion": "2023-04-01",
+      "name": "[parameters('vnetBastionName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+	    "addressSpace": {
+		  "addressPrefixes": [
+		    "10.40.0.0/16"
+		  ]
+	    }
+	  }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-04-01",
+      "name": "[concat(parameters('vnetBastionName'), '/AzureBastionSubnet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetBastionName'))]"
+      ],
+      "properties": {
+        "addressPrefix": "10.40.0.0/24"
+      }
+    },
+    {
       "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
       "apiVersion": "2023-04-01",
-      "name": "[concat(parameters('vnetName'), '/Vnet-To-Peer')]",
+      "name": "[concat(parameters('vnetName'), '/Vnet-To-GW')]",
       "location": "[parameters('location')]",
 	  "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]"
@@ -95,17 +133,17 @@
 	    "allowGatewayTransit": "false",
 	    "useRemoteGateways": "false",
 	    "remoteVirtualNetwork": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetPeerName'))]"
+          "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetGWName'))]"
 	    }
       }
     },
     {
       "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
       "apiVersion": "2023-04-01",
-      "name": "[concat(parameters('vnetPeerName'), '/Peer-To-Vnet')]",
+      "name": "[concat(parameters('vnetGWName'), '/GW-To-Vnet')]",
       "location": "[parameters('location')]",
 	  "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetPeerName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
 	  ],	  
       "properties": {
   	    "allowVirtualNetworkAccess": "true",
@@ -120,19 +158,63 @@
     {
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2023-04-01",
-      "name": "[parameters('ipName')]",
+      "name": "[parameters('ipGWName')]",
       "location": "[parameters('location')]",
 	  "sku": {
-        "name": "Standard"
+        "name": "Standard",
+		"tier": "Regional"
 	  },
-	  "zones": [
-		"1"
-	  ],
+	  "zones": [],
       "properties": {
 		"publicIPAddressVersion": "IPv4",
-		"publicIPAllocationMethod": "Static",
-		"idleTimeoutInMinutes": 4,
-		"ipTags": []
+		"publicIPAllocationMethod": "Static"
+	  }
+    },
+	{
+	  "type": "Microsoft.Network/virtualNetworkGateways",
+	  "apiVersion": "2023-02-01",
+	  "name": "[parameters('name')]",
+	  "location": "[parameters('location')]",
+	  "dependsOn": [
+		"[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
+	  ],
+	  "properties": {
+		"vpnType": "RouteBased",
+		"vpnGatewayGeneration": "[parameters('vpnGatewayGeneration')]",
+		"sku": {
+		  "name": "VpnGw1",
+		  "tier": "VpnGw1"
+		},		  
+		"gatewayType": "Vpn",
+		"ipConfigurations": [
+		  {
+			"name": "default",
+			"properties": {
+			  "privateIPAllocationMethod": "Dynamic",
+			  "subnet": {
+				"id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetGWName'), 'subnetGW')]"
+			  },
+			  "publicIpAddress": {
+				"id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipGWName'))]"
+			  }
+			}
+		  }
+		]
+	  }
+	},
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2023-04-01",
+      "name": "[parameters('ipBastionName')]",
+      "location": "[parameters('location')]",
+	  "sku": {
+        "name": "Standard",
+		"tier": "Regional"
+	  },
+	  "zones": [],
+      "properties": {
+		"publicIPAddressVersion": "IPv4",
+		"publicIPAllocationMethod": "Static"
 	  }
     }
   ],
