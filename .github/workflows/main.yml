@@ -18,7 +18,7 @@ on: [push]
         uses: azure/arm-deploy@v1
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-          resourceGroupName: "AZ-500"
+          resourceGroupName: AZ-500
           template: ./azuredeploy.json
           parameters: storageAccountType=Standard_LRS
 
