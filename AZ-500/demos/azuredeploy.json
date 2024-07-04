@@ -29,7 +29,8 @@
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
-    },	
+    },
+
     "vnetGWName": {
       "type": "string",
       "defaultValue": "[format('vnetGW{0}', uniqueString(resourceGroup().id))]",
@@ -58,6 +59,7 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },	
+
     "vnetBastionName": {
       "type": "string",
       "defaultValue": "[format('vnetBastion{0}', uniqueString(resourceGroup().id))]",
@@ -130,7 +132,28 @@
 		"publicIPAddressVersion": "IPv4",
 		"publicIPAllocationMethod": "Static"
 	  }
-    },	
+    },
+	{
+      "type": "Microsoft.Network/natGateways",
+	  "apiVersion": "2023-04-01",
+	  "name": "[parameters('ngName')]",
+	  "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('ipNGName'))]"
+      ],	  
+      "sku": {
+        "name": "Standard"
+      },	  
+	  "properties": {
+        "idleTimeoutInMinutes": 10,
+		"publicIPAddresses": [
+          {
+            "id": "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('ipNGName'))]"
+          }
+        ]		
+	  }
+	},	
+
     {
       "type": "Microsoft.Network/virtualNetworks",
 	  "apiVersion": "2023-04-01",
@@ -241,6 +264,7 @@
 		]
 	  }
 	},
+
     {
       "type": "Microsoft.Network/virtualNetworks",
 	  "apiVersion": "2023-04-01",
