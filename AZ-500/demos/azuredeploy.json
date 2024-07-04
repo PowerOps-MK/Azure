@@ -56,9 +56,11 @@
       "name": "[parameters('vnetPeerName')]",
       "location": "[parameters('location')]",
       "properties": {
+	    "addressSpace": {
 		  "addressPrefixes": [
 		    "10.20.0.0/16"
 		  ]
+	    }
 	  }
     },
     {
@@ -70,6 +72,24 @@
       ],
       "properties": {
         "addressPrefix": "10.20.0.0/24"
+      }
+    },	
+    {
+      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+      "apiVersion": "2023-04-01",
+      "name": "[concat(parameters('vnetName'), '/Spoke-To-Hub')]",
+      "location": "[parameters('location')]",
+	  "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]"
+	  ],	  
+      "properties": {
+  	    "allowVirtualNetworkAccess": "true",
+ 	    "allowForwardedTraffic": "true",
+	    "allowGatewayTransit": "false",
+	    "useRemoteGateways": "true",
+	    "remoteVirtualNetwork": {
+          "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetPeerName'))]"
+	    }
       }
     }
   ],
