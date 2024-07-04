@@ -103,30 +103,6 @@
       }
     },	
     {
-      "type": "Microsoft.Network/virtualNetworks",
-	  "apiVersion": "2023-04-01",
-      "name": "[parameters('vnetBastionName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-	    "addressSpace": {
-		  "addressPrefixes": [
-		    "10.40.0.0/16"
-		  ]
-	    }
-	  }
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "apiVersion": "2023-04-01",
-      "name": "[concat(parameters('vnetBastionName'), '/AzureBastionSubnet')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetBastionName'))]"
-      ],
-      "properties": {
-        "addressPrefix": "10.40.0.0/24"
-      }
-    },
-    {
       "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
       "apiVersion": "2023-04-01",
       "name": "[concat(parameters('vnetName'), '/Vnet-To-GW')]",
@@ -187,7 +163,7 @@
 	  ],
 	  "properties": {
 		"vpnType": "RouteBased",
-		"vpnGatewayGeneration": "[parameters('vpnGatewayGeneration')]",
+		"vpnGatewayGeneration": "Generation1",
 		"sku": {
 		  "name": "VpnGw1",
 		  "tier": "VpnGw1"
@@ -209,6 +185,30 @@
 		]
 	  }
 	},
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+	  "apiVersion": "2023-04-01",
+      "name": "[parameters('vnetBastionName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+	    "addressSpace": {
+		  "addressPrefixes": [
+		    "10.40.0.0/16"
+		  ]
+	    }
+	  }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2023-04-01",
+      "name": "[concat(parameters('vnetBastionName'), '/AzureBastionSubnet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetBastionName'))]"
+      ],
+      "properties": {
+        "addressPrefix": "10.40.0.0/24"
+      }
+    },	
     {
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2023-04-01",
