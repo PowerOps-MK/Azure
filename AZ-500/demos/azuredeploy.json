@@ -39,7 +39,7 @@
     },
     "snetGWName": {
       "type": "string",
-      "defaultValue": "/GatewaySubnet",
+      "defaultValue": "GatewaySubnet",
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
@@ -67,7 +67,7 @@
     },	
     "snetBastionName": {
       "type": "string",
-      "defaultValue": "/AzureBastionSubnet",
+      "defaultValue": "AzureBastionSubnet",
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
@@ -147,7 +147,7 @@
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-04-01",
-      "name": "[concat(parameters('vnetGWName'), parameters('snetGWName'))]",
+      "name": "[concat(parameters('vnetGWName'), '/', parameters('snetGWName'))]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
       ],
@@ -257,7 +257,7 @@
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-04-01",
-      "name": "[concat(parameters('vnetBastionName'), parameters('snetBastionName'))]",
+      "name": "[concat(parameters('vnetBastionName'), '/', parameters('snetBastionName'))]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetBastionName'))]"
       ],
