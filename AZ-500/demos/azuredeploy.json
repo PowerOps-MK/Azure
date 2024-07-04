@@ -8,7 +8,21 @@
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
-    },  
+    },
+    "ngName": {
+      "type": "string",
+      "defaultValue": "[format('Natgateway{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },		
+    "ipNGName": {
+      "type": "string",
+      "defaultValue": "[format('IPNG{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
     "vnetGWName": {
       "type": "string",
       "defaultValue": "[format('vnetGW{0}', uniqueString(resourceGroup().id))]",
@@ -79,6 +93,24 @@
       }
     },	
     {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2023-04-01",
+      "name": "[parameters('ipNGNameName')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]"
+      ],	  
+	  "sku": {
+        "name": "Standard",
+		"tier": "Regional"
+	  },
+	  "zones": [],
+      "properties": {
+		"publicIPAddressVersion": "IPv4",
+		"publicIPAllocationMethod": "Static"
+	  }
+    },	
+    {
       "type": "Microsoft.Network/virtualNetworks",
 	  "apiVersion": "2023-04-01",
       "name": "[parameters('vnetGWName')]",
@@ -94,7 +126,7 @@
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2023-04-01",
-      "name": "[concat(parameters('vnetGWName'), '/subnetGW')]",
+      "name": "[concat(parameters('vnetGWName'), '/GatewaySubnet')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
       ],
@@ -143,6 +175,9 @@
       "apiVersion": "2023-04-01",
       "name": "[parameters('ipGWName')]",
       "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
+      ],	  
 	  "sku": {
         "name": "Standard",
 		"tier": "Regional"
@@ -214,6 +249,9 @@
       "apiVersion": "2023-04-01",
       "name": "[parameters('ipBastionName')]",
       "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetBastionName'))]"
+      ],	  
 	  "sku": {
         "name": "Standard",
 		"tier": "Regional"
