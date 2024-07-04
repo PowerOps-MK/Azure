@@ -21,7 +21,7 @@ concurrency:
 # Set environment variables
 env:
   # Use folder for ARM template
-  FOLDER: .AZ-500/demos
+  FOLDER: ./AZ-500/demos
   RG: AZ-500
 
 # Permissions needed to run the workflow (top level)
