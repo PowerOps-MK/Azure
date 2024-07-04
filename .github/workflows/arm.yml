@@ -62,4 +62,4 @@ jobs:
         with:
           resourceGroupName: ${{ env.RG }}
           template: ${{ env.FOLDER }}/azuredeploy.json
-          parameters: ${{ env.FOLDER }}/azuredeploy.parameters.json
+          # parameters: ${{ env.FOLDER }}/azuredeploy.parameters.json
