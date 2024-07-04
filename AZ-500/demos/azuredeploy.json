@@ -16,6 +16,13 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },
+    "ipName": {
+      "type": "string",
+      "defaultValue": "[format('IP{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -95,7 +102,7 @@
     {
       "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
       "apiVersion": "2023-04-01",
-      "name": "[concat(parameters('vnetName'), '/Peer-To-Vnet')]",
+      "name": "[concat(parameters('vnetPeerName'), '/Peer-To-Vnet')]",
       "location": "[parameters('location')]",
 	  "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetPeerName'))]"
@@ -109,7 +116,25 @@
           "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
 	    }
       }
-    },	
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2023-04-01",
+      "name": "[parameters('ipName')]",
+      "location": "[parameters('location')]",
+	  "sku": {
+        "name": "Standard"
+	  },
+	  "zones": [
+		"1"
+	  ],
+      "properties": {
+		"publicIPAddressVersion": "IPv4",
+		"publicIPAllocationMethod": "Static",
+		"idleTimeoutInMinutes": 4,
+		"ipTags": []
+	  }
+    }
   ],
   "outputs": {}
 }
