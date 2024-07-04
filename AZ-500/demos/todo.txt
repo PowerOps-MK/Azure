@@ -1,6 +1,5 @@
 nsg
 udr
-vpn
 private endpoint
 service endpoint
 storage
