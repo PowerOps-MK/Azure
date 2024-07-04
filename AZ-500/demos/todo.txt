@@ -1,1 +1,14 @@
+vnet 1 en 2 peering
+nsg
+udr
+vpn
+private endpoint
+service endpoint
 storage
+bastion
+container instancne
+container registry
+vm
+Key vault
+Azure SQL
+Log Analytics
