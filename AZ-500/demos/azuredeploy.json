@@ -16,9 +16,16 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },
+    "gwName": {
+      "type": "string",
+      "defaultValue": "[format('gateway{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
     "ipGWName": {
       "type": "string",
-      "defaultValue": "[format('IP{0}', uniqueString(resourceGroup().id))]",
+      "defaultValue": "[format('IPGW{0}', uniqueString(resourceGroup().id))]",
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
@@ -32,7 +39,7 @@
     },	
     "ipBastionName": {
       "type": "string",
-      "defaultValue": "[format('IP{0}', uniqueString(resourceGroup().id))]",
+      "defaultValue": "[format('IPBastion{0}', uniqueString(resourceGroup().id))]",
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
@@ -173,7 +180,7 @@
 	{
 	  "type": "Microsoft.Network/virtualNetworkGateways",
 	  "apiVersion": "2023-02-01",
-	  "name": "[parameters('name')]",
+	  "name": "[parameters('gwName')]",
 	  "location": "[parameters('location')]",
 	  "dependsOn": [
 		"[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
