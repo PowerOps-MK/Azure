@@ -50,18 +50,6 @@
         "addressPrefix": "10.10.0.0/24"
       }
     },	
-	{
-	  "type": "Microsoft.Authorization/locks",
-      "apiVersion": "2020-05-01",
-	  "name": "Lock",
-	  "scope": "[concat('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]",
-	  "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]"
-	  ],
-      "properties": {
-        "level": "CanNotDelete"
-	  }
-	},
     {
       "type": "Microsoft.Network/virtualNetworks",
 	  "apiVersion": "2023-04-01",
