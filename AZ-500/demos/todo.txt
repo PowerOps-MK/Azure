@@ -1,7 +1,4 @@
-Azure SQL
-
 
 bastion
-container instancne
 vm
 
