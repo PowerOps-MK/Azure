@@ -223,31 +223,7 @@
 	  "properties": {
 	  } 
 	},
-	{
-	  "type": "Microsoft.Network/privateEndpoints",
-	  "apiVersion": "2020-11-01",
-	  "name": "[parameters('peName')]",
-	  "location": "[parameters('location')]",
-	  "dependsOn": [
-          "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
-      ],
-	  "properties": {
-        "privateLinkServiceConnections": [
-	      {
-		    "name": "[concat(parameters('peName'), '-nic')]",
-		    "properties": {
-			  "privateLinkServiceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
-			  "groupIds": [
-			    "blob"
-			  ]
-		    }
-		  }
-	    ],
-	    "subnet": {
-	      "id": "[resourceId('AZ-500', 'Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]"
-	    }
-	  }
-    },
+
 	
     {
       "type": "Microsoft.Network/virtualNetworks",
@@ -370,6 +346,21 @@
 		"publicIPAddressVersion": "IPv4",
 		"publicIPAllocationMethod": "Static"
 	  }
+    },
+	
+    {
+      "type": "Microsoft.KeyVault/vaults",
+	  "apiVersion": "2023-07-01",
+      "name": "[parameters('kvName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "enableSoftDelete": false,
+        "enablePurgeProtection": false,
+        "sku": {
+          "name": "Standard",
+          "family": "A"
+        }
+      }
     }
   ],
   "outputs": {}
