@@ -18,7 +18,7 @@
     },	
     "ngName": {
       "type": "string",
-      "defaultValue": "[format('Natgateway{0}', uniqueString(resourceGroup().id))]",
+      "defaultValue": "[format('NAT{0}', uniqueString(resourceGroup().id))]",
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
@@ -76,7 +76,7 @@
     },	
     "gwName": {
       "type": "string",
-      "defaultValue": "[format('gateway{0}', uniqueString(resourceGroup().id))]",
+      "defaultValue": "[format('GW{0}', uniqueString(resourceGroup().id))]",
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
@@ -236,7 +236,15 @@
         },
 		"networkSecurityGroup": {
 		  "id": "[resourceId('Microsoft.Network/networkSecurityGroups/', parameters('nsgName'))]"
-		}
+		},
+		"serviceEndpoints": [
+          {
+            "service": "Microsoft.KeyVault",
+            "locations": [
+              "*"
+            ]
+          }
+        ]
 	  }
 	},
 
