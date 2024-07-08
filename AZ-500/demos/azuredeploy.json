@@ -261,6 +261,7 @@
         ]
 	  }
 	},
+	
 	{
 	  "type": "Microsoft.Compute/virtualMachines",
 	  "apiVersion": "2021-03-01",
@@ -276,7 +277,7 @@
 		"storageProfile": {
 		  "osDisk": {
 			"createOption": "fromImage",
-			"deleteOption": "Delete"
+			"deleteOption": "Delete",
 			"managedDisk": {
 			  "storageAccountType": "Premium_LRS"
 			}
@@ -291,7 +292,7 @@
 		"osProfile": {
 		  "computerName": "[parameters('vmName')]",
 		  "adminUsername": "johndoe",
-		  "adminPassword": "supersecuretestpassword9889@@@",
+		  "adminPassword": "supersecuretestpassword9889@@@"
 		},
         "diagnosticsProfile": {
           "bootDiagnostics": {
