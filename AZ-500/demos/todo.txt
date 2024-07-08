@@ -1,11 +1,9 @@
+Azure SQL
 
-private endpoint
 service endpoint
-storage
 bastion
 container instancne
 container registry
 vm
 Key vault
-Azure SQL
 Log Analytics
