@@ -1,5 +1,4 @@
-nsg
-udr
+
 private endpoint
 service endpoint
 storage
