@@ -44,6 +44,21 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },
+	
+    "storageName": {
+      "type": "string",
+      "defaultValue": "[format('storage{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
+    "peName": {
+      "type": "string",
+      "defaultValue": "[format('UDR{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },
 
     "vnetGWName": {
       "type": "string",
@@ -195,6 +210,45 @@
 	  }
 	},
 
+    {
+	  "type": "Microsoft.Storage/storageAccounts",
+	  "apiVersion": "2019-06-01",
+	  "name": "[parameters('storageName')]",
+	  "location": "[parameters('location')]",
+	  "sku": {
+        "name": "Premium_LRS",
+        "tier": "Premium"
+      },
+      "kind": "StorageV2",
+	  "properties": {
+	  } 
+	},
+	{
+	  "type": "Microsoft.Network/privateEndpoints",
+	  "apiVersion": "2020-11-01",
+	  "name": "[parameters('peName')]",
+	  "location": "[parameters('location')]",
+	  "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+      ],
+	  "properties": {
+        "privateLinkServiceConnections": [
+	      {
+		    "name": "[parameters('peName')]",
+		    "properties": {
+			  "privateLinkServiceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
+			  "groupIds": [
+			    "file"
+			  ],
+		    }
+		  }
+	    ],
+	    "subnet": {
+	      "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]"
+	    }
+	  }
+    },	
+	
     {
       "type": "Microsoft.Network/virtualNetworks",
 	  "apiVersion": "2023-04-01",
