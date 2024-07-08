@@ -414,7 +414,7 @@
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
       ],
       "properties": {
-        "addressPrefix": "10.42.0.0/24"
+        "addressPrefix": "10.40.10.0/24"
       }
     },	
     {
