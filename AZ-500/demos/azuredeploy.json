@@ -239,7 +239,7 @@
 			  "privateLinkServiceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
 			  "groupIds": [
 			    "file"
-			  ],
+			  ]
 		    }
 		  }
 	    ],
