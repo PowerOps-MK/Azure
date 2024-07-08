@@ -125,7 +125,14 @@
       "metadata": {
         "description": "Specifies the location in which the Azure Storage resources should be deployed."
       }
-    }
+    },
+	"tenantId": {
+	  "type": "string",
+	  "defaultValue": "[subscription().tenantId]",
+	  "metadata": {
+  	    "description": "The location of the Managed Cluster resource."
+	  }
+	}	
   },
   "variables": {},
   "resources": [
@@ -364,6 +371,7 @@
       "location": "[parameters('location')]",
       "properties": {
         "enableSoftDelete": false,
+		"tenantId": "[parameters('tenantId')]",
         "sku": {
           "name": "Standard",
           "family": "A"
