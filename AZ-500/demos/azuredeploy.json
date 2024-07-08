@@ -371,6 +371,7 @@
       "location": "[parameters('location')]",
       "properties": {
         "enableSoftDelete": false,
+		"enableRbacAuthorization": true,
 		"tenantId": "[parameters('tenantId')]",
         "sku": {
           "name": "Standard",
