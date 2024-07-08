@@ -268,6 +268,29 @@
 	  "properties": {
 	  } 
 	},
+	{
+	  "type": "Microsoft.Network/privateEndpoints",
+	  "apiVersion": "2023-11-01",
+	  "name": "[parameters('peName')]",
+	  "location": "[parameters('location')]",
+	  "properties": {
+	    "privateLinkServiceConnections": [
+		  {
+			"name": "[parameters('privateEndpoints_pe_name')]",
+			"id": "[concat(resourceId('Microsoft.Network/privateEndpoints', parameters('peName')), concat('/privateLinkServiceConnections/', parameters('peName')))]",
+			"properties": {
+			  "privateLinkServiceId": "/subscriptions/fe80736d-dec5-4e59-aaff-47d50d1ec65c/resourceGroups/AZ-500/providers/Microsoft.Storage/storageAccounts/storagewrusrom3c2jiu",
+			  "groupIds": [
+				"blob"
+			  ]
+			}
+		  }
+		],
+		"subnet": {
+		  "id": "/subscriptions/fe80736d-dec5-4e59-aaff-47d50d1ec65c/resourceGroups/AZ-500/providers/Microsoft.Network/virtualNetworks/vnetwrusrom3c2jiu/subnets/subnetA"
+		}
+	  }
+	},
 	
     {
       "type": "Microsoft.Network/virtualNetworks",
@@ -451,18 +474,18 @@
 			"name": "container",
 			"properties": {
 			  "image": "mcr.microsoft.com/azuredocs/aci-helloworld:latest",
-			  "ports": [
-		        {
-			      "port": "80",
-			      "protocol": "TCP"
-			    }
-		      ],
 			  "resources": {
 			      "requests": {
 			        "cpu": 1,
 			        "memoryInGB": 1.5
 			    }
-			  }
+			  },
+			  "ports": [
+		        {
+			      "port": "80",
+			      "protocol": "TCP"
+			    }
+		      ]
 			}
 		  }
 		]
