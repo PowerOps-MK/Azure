@@ -244,7 +244,7 @@
 		  }
 	    ],
 	    "subnet": {
-	      "id": "'Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]"
+	      "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]"
 	    }
 	  }
     },		
