@@ -118,6 +118,13 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },
+    "logName": {
+      "type": "string",
+      "defaultValue": "[format('LOG{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
 
     "location": {
       "type": "string",
@@ -239,31 +246,6 @@
 	  "properties": {
 	  } 
 	},
-	{
-	  "type": "Microsoft.Network/privateEndpoints",
-	  "apiVersion": "2020-11-01",
-	  "name": "[parameters('peName')]",
-	  "location": "[parameters('location')]",
-	  "dependsOn": [
-          "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
-      ],
-	  "properties": {
-        "privateLinkServiceConnections": [
-	      {
-		    "name": "[concat(parameters('peName'), '-nic')]",
-		    "properties": {
-			  "privateLinkServiceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
-			  "groupIds": [
-			    "blob"
-			  ]
-		    }
-		  }
-	    ],
-	    "subnet": {
-	      "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', parameters('vnetName'), parameters('snetAName'))]"
-	    }
-	  }
-    },
 	
     {
       "type": "Microsoft.Network/virtualNetworks",
@@ -402,7 +384,18 @@
           "family": "A"
         }
       }
-    }
+    },
+    {
+	  "type": "Microsoft.OperationalInsights/workspaces",
+	  "apiVersion": "2022-10-01",
+	  "name": "[parameters('logName')]",
+      "location": "[parameters('location')]",
+	  "properties": {
+	    "sku": {
+		  "name": "Free"
+		}
+	  }
+	},
   ],
   "outputs": {}
 }
