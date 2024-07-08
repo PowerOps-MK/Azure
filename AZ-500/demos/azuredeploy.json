@@ -242,7 +242,10 @@
 			  ]
 		    }
 		  }
-	    ]
+	    ],
+	    "subnet": {
+	      "id": "/subscriptions/fe80736d-dec5-4e59-aaff-47d50d1ec65c/resourceGroups/AZ-500/providers/Microsoft.Network/virtualNetworks/vnetwrusrom3c2jiu/subnets/subnetA"
+	    }
 	  }
     },		
 	
