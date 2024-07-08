@@ -390,7 +390,6 @@
 	  }
     },
 
-
     {
       "type": "Microsoft.Network/virtualNetworks",
 	  "apiVersion": "2023-04-01",
@@ -430,7 +429,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2023-04-01",
       "name": "[parameters('ipBastionName')]",
-      "location": "[parameters('location')]",
+      "location": "westus",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
       ],	  
@@ -453,7 +452,7 @@
 		  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetBastionName'))]"
 		],
 		"sku": {
-			"name": "Developer"
+		  "name": "Developer"
 		},
 		"properties": {
 		  "virtualNetwork": {
@@ -466,7 +465,7 @@
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2018-11-01",
       "name": "[concat(parameters('vmName'), '-nic')]",
-      "location": "[parameters('location')]",
+      "location": "westus",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetAName'))]"
       ],		  
@@ -487,7 +486,7 @@
 	  "type": "Microsoft.Compute/virtualMachines",
 	  "apiVersion": "2021-03-01",
 	  "name": "[parameters('vmName')]",
-	  "location": "[parameters('location')]",
+	  "location": "westus",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetAName'))]"
       ],	  
