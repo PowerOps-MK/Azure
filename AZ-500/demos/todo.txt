@@ -1,8 +1,7 @@
 Azure SQL
 
-service endpoint
+
 bastion
 container instancne
-container registry
 vm
 
