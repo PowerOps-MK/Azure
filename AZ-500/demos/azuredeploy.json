@@ -117,7 +117,14 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },
-
+    "bastionName": {
+      "type": "string",
+      "defaultValue": "[format('Bastion{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },
+	
     "kvName": {
       "type": "string",
       "defaultValue": "[format('KV{0}', uniqueString(resourceGroup().id))]",
@@ -388,7 +395,7 @@
       "type": "Microsoft.Network/virtualNetworks",
 	  "apiVersion": "2023-04-01",
       "name": "[parameters('vnetBastionName')]",
-      "location": "[parameters('location')]",
+      "location": "westus",
       "properties": {
 	    "addressSpace": {
 		  "addressPrefixes": [
@@ -437,6 +444,23 @@
 		"publicIPAllocationMethod": "Static"
 	  }
     },
+	{
+		"type": "Microsoft.Network/bastionHosts",
+		"apiVersion": "2023-09-01",
+		"name": "[parameters('bastionName')]",
+		"location": "westus",
+		"dependsOn": [
+		  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetBastionName'))]"
+		],
+		"sku": {
+			"name": "Developer"
+		},
+		"properties": {
+		  "virtualNetwork": {
+			"id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
+		  }
+		}
+	},
 
     {
       "type": "Microsoft.Network/networkInterfaces",
