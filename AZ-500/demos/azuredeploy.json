@@ -125,7 +125,14 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },	
-
+    "acrName": {
+      "type": "string",
+      "defaultValue": "[format('acr{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
+	
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -395,8 +402,18 @@
 		  "name": "pergb2018"
 		}
 	  }
-	}
-
+	},
+    {
+      "name": "[parameters('acrName')]",
+      "type": "Microsoft.ContainerRegistry/registries",
+      "apiVersion": "2019-05-01",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Basic",
+        "tier": "Basic"
+      },
+      "properties": {}
+    }
   ],
   "outputs": {}
 }
