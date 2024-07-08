@@ -238,7 +238,9 @@
 	  "name": "[concat(parameters('vnetName'), '/', parameters('snetAName'))]",
 	  "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+        "[resourceId('Microsoft.Network/routeTables', parameters('udrName'))]",
+		"[resourceId('Microsoft.Network/natGateways', parameters('ngName'))]",
+		"[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
       ],  
 	  "properties": {
 		"addressPrefix": "10.10.0.0/24",  
@@ -457,7 +459,55 @@
         ]		
 	  }
     },
-	
+	{
+	  "type": "Microsoft.Compute/virtualMachines",
+	  "apiVersion": "2021-03-01",
+	  "name": "[parameters('vmName')]",
+	  "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetAName'))]"
+      ],	  
+ 	  "properties": {
+		"hardwareProfile": {
+		  "vmSize": "Standard_DS1_v2"		  
+		},
+		"storageProfile": {
+		  "osDisk": {
+			"createOption": "fromImage",
+			"deleteOption": "Delete",
+			"managedDisk": {
+			  "storageAccountType": "Premium_LRS"
+			}
+		  },
+		  "imageReference": {
+			"publisher": "canonical",
+			"offer": "0001-com-ubuntu-server-focal",
+			"sku": "20_04-lts-gen2",
+			"version": "latest"
+		  }
+		},
+		"networkProfile": {
+		  "networkInterfaces": [
+		    {
+			  "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('vmName'), '-nic'))]",
+			  "properties": {
+			    "deleteOption": "Delete"
+              }
+			}
+		  ]
+		},		
+		"osProfile": {
+		  "computerName": "[parameters('vmName')]",
+		  "adminUsername": "johndoe",
+		  "adminPassword": "supersecuretestpassword9889@@@"
+		},
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": false
+          }
+        }
+	  }
+	},	
 	
     {
       "type": "Microsoft.KeyVault/vaults",
