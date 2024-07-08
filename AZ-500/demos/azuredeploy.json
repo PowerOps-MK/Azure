@@ -234,9 +234,9 @@
 	  "properties": {
         "privateLinkServiceConnections": [
 	      {
-		    "name": "[parameters('peName')]",
+		    "name": "[concat(parameters('peName'), '-nic')]",
 		    "properties": {
-			  "privateLinkServiceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
+			  "privateLinkServiceId": "/subscriptions/fe80736d-dec5-4e59-aaff-47d50d1ec65c/resourceGroups/AZ-500/providers/Microsoft.Storage/storageAccounts/storagewrusrom3c2jiu",
 			  "groupIds": [
 			    "blob"
 			  ]
@@ -244,7 +244,7 @@
 		  }
 	    ],
 	    "subnet": {
-	      "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]"
+	      "id": "/subscriptions/fe80736d-dec5-4e59-aaff-47d50d1ec65c/resourceGroups/AZ-500/providers/Microsoft.Network/virtualNetworks/vnetwrusrom3c2jiu/subnets/subnetA"
 	    }
 	  }
     },
