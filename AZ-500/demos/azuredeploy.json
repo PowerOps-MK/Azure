@@ -181,21 +181,7 @@
 	  "name": "[parameters('udrName')]",
 	  "location": "[parameters('location')]",
 	  "properties": {
-        "disableBgpRoutePropagation": false,
-		"copy": [
-		  {
-		    "name": "routes",
-			"count": "[length(parameters('routes'))]",
-			"input": {
-			  "name": "[concat(parameters('routes')[copyIndex('routes')].name)]",
-			  "properties": {
-			    "addressPrefix": "[concat(parameters('routes')[copyIndex('routes')].prefix)]",
-				"nextHopType": "[concat(parameters('routes')[copyIndex('routes')].nextHopType)]",
-                "nextHopIpAddress": "[concat(parameters('routes')[copyIndex('routes')].nextHopIP)]"
-		      }
-			}
-		  }
-		]
+        "disableBgpRoutePropagation": false
 	  }
     },
 
