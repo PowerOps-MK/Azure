@@ -239,7 +239,31 @@
 	  "properties": {
 	  } 
 	},
-
+	{
+	  "type": "Microsoft.Network/privateEndpoints",
+	  "apiVersion": "2020-11-01",
+	  "name": "[parameters('peName')]",
+	  "location": "[parameters('location')]",
+	  "dependsOn": [
+          "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+      ],
+	  "properties": {
+        "privateLinkServiceConnections": [
+	      {
+		    "name": "[concat(parameters('peName'), '-nic')]",
+		    "properties": {
+			  "privateLinkServiceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
+			  "groupIds": [
+			    "blob"
+			  ]
+		    }
+		  }
+	    ],
+	    "subnet": {
+	      "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', parameters('vnetName'), parameters('snetAName'))]"
+	    }
+	  }
+    },
 	
     {
       "type": "Microsoft.Network/virtualNetworks",
