@@ -132,6 +132,13 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },	
+    "containerName": {
+      "type": "string",
+      "defaultValue": "[format('CI{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
 	
     "location": {
       "type": "string",
@@ -421,7 +428,46 @@
         "tier": "Basic"
       },
       "properties": {}
-    }
+    },
+	{
+	  "name": "[parameters('containerName')]",
+	  "type": "Microsoft.ContainerInstance/containerGroups",
+      "apiVersion": "2022-10-01-preview",
+	  "location": "[parameters('location')]",
+	  "properties": {
+		"osType": "Linux",
+		"sku": "Standard",
+		"ipAddress": {
+		  "type": "Public",
+		  "ports": [
+		    {
+			  "port": "80",
+			  "protocol": "TCP"
+			}
+		  ]
+		},		  
+		"containers": [
+		  {
+			"name": "[parameters('containerName')]",
+			"properties": {
+			  "image": "mcr.microsoft.com/azuredocs/aci-helloworld:latest",
+			  "ports": [
+		        {
+			      "port": "80",
+			      "protocol": "TCP"
+			    }
+		      ],
+			  "resources": {
+			      "requests": {
+			        "cpu": 1,
+			        "memoryInGB": 1.5
+			    }
+			  }
+			}
+		  }
+		]
+	  }
+	}
   ],
   "outputs": {}
 }
