@@ -448,7 +448,7 @@
 		},		  
 		"containers": [
 		  {
-			"name": "[parameters('containerName')]",
+			"name": "container",
 			"properties": {
 			  "image": "mcr.microsoft.com/azuredocs/aci-helloworld:latest",
 			  "ports": [
