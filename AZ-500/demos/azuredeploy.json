@@ -274,9 +274,12 @@
 	  "name": "[parameters('peName')]",
 	  "location": "[parameters('location')]",
 	  "properties": {
+		"subnet": {
+		  "id": "/subscriptions/fe80736d-dec5-4e59-aaff-47d50d1ec65c/resourceGroups/AZ-500/providers/Microsoft.Network/virtualNetworks/vnetwrusrom3c2jiu/subnets/subnetA"
+		},		  
 	    "privateLinkServiceConnections": [
 		  {
-			"name": "[parameters('privateEndpoints_pe_name')]",
+			"name": "[concat(parameters('peName'), '-nic')]",
 			"id": "[concat(resourceId('Microsoft.Network/privateEndpoints', parameters('peName')), concat('/privateLinkServiceConnections/', parameters('peName')))]",
 			"properties": {
 			  "privateLinkServiceId": "/subscriptions/fe80736d-dec5-4e59-aaff-47d50d1ec65c/resourceGroups/AZ-500/providers/Microsoft.Storage/storageAccounts/storagewrusrom3c2jiu",
@@ -285,10 +288,7 @@
 			  ]
 			}
 		  }
-		],
-		"subnet": {
-		  "id": "/subscriptions/fe80736d-dec5-4e59-aaff-47d50d1ec65c/resourceGroups/AZ-500/providers/Microsoft.Network/virtualNetworks/vnetwrusrom3c2jiu/subnets/subnetA"
-		}
+		]
 	  }
 	},
 	
