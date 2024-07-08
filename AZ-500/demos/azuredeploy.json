@@ -110,6 +110,15 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },
+
+    "kvName": {
+      "type": "string",
+      "defaultValue": "[format('KV{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },
+
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
