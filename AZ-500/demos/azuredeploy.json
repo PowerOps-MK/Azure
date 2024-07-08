@@ -364,7 +364,6 @@
       "location": "[parameters('location')]",
       "properties": {
         "enableSoftDelete": false,
-        "enablePurgeProtection": false,
         "sku": {
           "name": "Standard",
           "family": "A"
