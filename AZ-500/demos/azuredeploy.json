@@ -442,7 +442,7 @@
 	  "name": "[parameters('vmName')]",
 	  "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetAName'))]"
       ],	  
  	  "properties": {
 		"hardwareProfile": {
