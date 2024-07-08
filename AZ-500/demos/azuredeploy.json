@@ -54,7 +54,7 @@
     },	
     "peName": {
       "type": "string",
-      "defaultValue": "[format('UDR{0}', uniqueString(resourceGroup().id))]",
+      "defaultValue": "[format('PE{0}', uniqueString(resourceGroup().id))]",
       "metadata": {
         "description": "Specifies the name of the Azure Storage account."
       }
