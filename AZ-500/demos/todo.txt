@@ -5,5 +5,4 @@ bastion
 container instancne
 container registry
 vm
-Key vault
-Log Analytics
+
