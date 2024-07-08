@@ -44,6 +44,13 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },
+    "vmName": {
+      "type": "string",
+      "defaultValue": "[format('VM{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
 	
     "storageName": {
       "type": "string",
@@ -176,7 +183,7 @@
       "name": "[parameters('ipNGName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
       ],	  
 	  "sku": {
         "name": "Standard",
@@ -194,7 +201,7 @@
 	  "name": "[parameters('ngName')]",
 	  "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('ipNGName'))]"
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipNGName'))]"
       ],	  
       "sku": {
         "name": "Standard"
@@ -203,7 +210,7 @@
         "idleTimeoutInMinutes": 10,
 		"publicIPAddresses": [
           {
-            "id": "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('ipNGName'))]"
+            "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipNGName'))]"
           }
         ]		
 	  }
@@ -231,7 +238,7 @@
 	  "name": "[concat(parameters('vnetName'), '/', parameters('snetAName'))]",
 	  "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
       ],  
 	  "properties": {
 		"addressPrefix": "10.10.0.0/24",  
@@ -242,7 +249,7 @@
           "id": "[resourceId('Microsoft.Network/natGateways', parameters('ngName'))]"
         },
 		"networkSecurityGroup": {
-		  "id": "[resourceId('Microsoft.Network/networkSecurityGroups/', parameters('nsgName'))]"
+		  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
 		},
 		"serviceEndpoints": [
           {
@@ -254,7 +261,46 @@
         ]
 	  }
 	},
-
+	{
+	  "type": "Microsoft.Compute/virtualMachines",
+	  "apiVersion": "2021-03-01",
+	  "name": "[parameters('vmName')]",
+	  "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+      ],	  
+ 	  "properties": {
+		"hardwareProfile": {
+		  "vmSize": "Standard_DS1_v2"		  
+		},
+		"storageProfile": {
+		  "osDisk": {
+			"createOption": "fromImage",
+			"deleteOption": "Delete"
+			"managedDisk": {
+			  "storageAccountType": "Premium_LRS"
+			}
+		  },
+		  "imageReference": {
+			"publisher": "canonical",
+			"offer": "0001-com-ubuntu-server-focal",
+			"sku": "20_04-lts-gen2",
+			"version": "latest"
+		  }
+		},
+		"osProfile": {
+		  "computerName": "[parameters('vmName')]",
+		  "adminUsername": "johndoe",
+		  "adminPassword": "supersecuretestpassword9889@@@",
+		},
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "enabled": false
+          }
+        }
+	  }
+	},
+	
     {
 	  "type": "Microsoft.Storage/storageAccounts",
 	  "apiVersion": "2019-06-01",
@@ -274,7 +320,8 @@
 	  "name": "[parameters('peName')]",
 	  "location": "[parameters('location')]",
 	  "dependsOn": [
-          "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]"
+		"[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]"
       ],
 	  "properties": {
         "privateLinkServiceConnections": [
@@ -289,7 +336,7 @@
 		  }
 	    ],
 	    "subnet": {
-	      "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', parameters('vnetName'), parameters('snetAName'))]"
+	      "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]"
 	    }
 	  }
     },
@@ -312,7 +359,7 @@
       "apiVersion": "2023-04-01",
       "name": "[concat(parameters('vnetGWName'), '/', parameters('snetGWName'))]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetGWName'))]"
       ],
       "properties": {
         "addressPrefix": "10.20.0.0/24"
@@ -324,7 +371,7 @@
       "name": "[concat(parameters('vnetName'), '/Vnet-To-GW')]",
       "location": "[parameters('location')]",
 	  "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetGWName'))]"
 	  ],	  
       "properties": {
   	    "allowVirtualNetworkAccess": "true",
@@ -342,7 +389,7 @@
       "name": "[concat(parameters('vnetGWName'), '/GW-To-Vnet')]",
       "location": "[parameters('location')]",
 	  "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetGWName'))]"
 	  ],	  
       "properties": {
   	    "allowVirtualNetworkAccess": "true",
@@ -360,7 +407,7 @@
       "name": "[parameters('ipGWName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetGWName'))]"
       ],	  
 	  "sku": {
         "name": "Standard",
@@ -392,7 +439,7 @@
       "apiVersion": "2023-04-01",
       "name": "[concat(parameters('vnetBastionName'), '/', parameters('snetBastionName'))]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetBastionName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
       ],
       "properties": {
         "addressPrefix": "10.40.0.0/24"
@@ -404,7 +451,7 @@
       "name": "[parameters('ipBastionName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetBastionName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
       ],	  
 	  "sku": {
         "name": "Standard",
