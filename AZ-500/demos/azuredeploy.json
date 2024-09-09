@@ -448,6 +448,23 @@
 		"publicIPAllocationMethod": "Static"
 	  }
     },
+	{
+		"type": "Microsoft.Network/bastionHosts",
+		"apiVersion": "2023-09-01",
+		"name": "[parameters('bastionName')]",
+		"location": "[parameters('location')]",
+		"dependsOn": [
+		  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetBastionName'))]"
+		],
+		"sku": {
+		  "name": "Developer"
+		},
+		"properties": {
+		  "virtualNetwork": {
+			"id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
+		  }
+		}
+	},
 
     {
       "type": "Microsoft.Network/networkInterfaces",
