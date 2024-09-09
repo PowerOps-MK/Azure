@@ -460,19 +460,9 @@
 		  "name": "Developer"
 		},
 		"properties": {
-          "ipConfigurations": [
-            {
-              "properties": {
-                "subnet": {
-                  "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetBastionName'))]"
-                },
-                "publicIPAddress": {
-                  "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipBastionName'))]"
-                }
-              },
-              "name": "ipconfig1"
-            }
-          ]			
+		  "virtualNetwork": {
+			"id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
+		  }
 		}
 	},
 
