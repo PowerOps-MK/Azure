@@ -89,13 +89,6 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },	
-    "peeringName": {
-      "type": "string",
-      "defaultValue": "/Vnet-To-GW",
-      "metadata": {
-        "description": "Specifies the name of the Azure Storage account."
-      }
-    },	
     "ipGWName": {
       "type": "string",
       "defaultValue": "[format('IPGW{0}', uniqueString(resourceGroup().id))]",
@@ -347,11 +340,11 @@
     {
       "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
       "apiVersion": "2023-04-01",
-      "name": "[concat(parameters('vnetName'), parameters('peeringName'))]",
+      "name": "[concat(parameters('vnetName'), '/Vnet-To-GW')]",
       "location": "[parameters('location')]",
 	  "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
-		"[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetGWName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]",
+		"[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetGWName'), parameters('snetGWName'))]"
 	  ],	  
       "properties": {
   	    "allowVirtualNetworkAccess": "true",
@@ -369,8 +362,8 @@
       "name": "[concat(parameters('vnetGWName'), '/GW-To-Vnet')]",
       "location": "[parameters('location')]",
 	  "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]",
-		"[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetGWName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('snetAName'))]",
+		"[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetGWName'), parameters('snetGWName'))]"
 	  ],	  
       "properties": {
   	    "allowVirtualNetworkAccess": "true",
