@@ -467,7 +467,7 @@
                   "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetBastionName'))]"
                 },
                 "publicIPAddress": {
-                  "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipBastionName')))]"
+                  "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipBastionName'))]"
                 }
               },
               "name": "ipconfig1"
