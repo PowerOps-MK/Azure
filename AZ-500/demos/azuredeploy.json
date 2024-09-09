@@ -111,13 +111,6 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },		
-    "ipBastionName": {
-      "type": "string",
-      "defaultValue": "[format('IPBastion{0}', uniqueString(resourceGroup().id))]",
-      "metadata": {
-        "description": "Specifies the name of the Azure Storage account."
-      }
-    },
     "bastionName": {
       "type": "string",
       "defaultValue": "[format('Bastion{0}', uniqueString(resourceGroup().id))]",
@@ -430,31 +423,14 @@
         "addressPrefix": "10.40.10.0/24"
       }
     },	
-    {
-      "type": "Microsoft.Network/publicIPAddresses",
-      "apiVersion": "2023-04-01",
-      "name": "[parameters('ipBastionName')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
-      ],	  
-	  "sku": {
-        "name": "Standard",
-		"tier": "Regional"
-	  },
-	  "zones": [],
-      "properties": {
-		"publicIPAddressVersion": "IPv4",
-		"publicIPAllocationMethod": "Static"
-	  }
-    },
 	{
 		"type": "Microsoft.Network/bastionHosts",
 		"apiVersion": "2023-09-01",
 		"name": "[parameters('bastionName')]",
 		"location": "[parameters('location')]",
 		"dependsOn": [
-		  "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
+          "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]",
+		  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetBastionName'))]"
 		],
 		"sku": {
 		  "name": "Developer"
