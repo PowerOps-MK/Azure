@@ -437,9 +437,9 @@
 		},
 		"properties": {
 		  "virtualNetwork": {
-			"id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
+		    "id": "/subscriptions/fe80736d-dec5-4e59-aaff-47d50d1ec65c/resourceGroups/AZ-500/providers/Microsoft.Network/virtualNetworks/vnetBastionwrusrom3c2jiu"
 		  }
-		}
+        }
 	},
 
     {
