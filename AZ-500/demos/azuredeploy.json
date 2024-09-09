@@ -454,7 +454,7 @@
 		"name": "[parameters('bastionName')]",
 		"location": "[parameters('location')]",
 		"dependsOn": [
-		  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetBastionName'))]"
+		  "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
 		],
 		"sku": {
 		  "name": "Developer"
