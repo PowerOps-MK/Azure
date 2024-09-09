@@ -44,6 +44,7 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },
+
     "vmName": {
       "type": "string",
       "defaultValue": "[format('VM{0}', uniqueString(resourceGroup().id))]",
@@ -139,6 +140,7 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },	
+
     "acrName": {
       "type": "string",
       "defaultValue": "[format('acr{0}', uniqueString(resourceGroup().id))]",
@@ -394,7 +396,7 @@
       "type": "Microsoft.Network/virtualNetworks",
 	  "apiVersion": "2023-04-01",
       "name": "[parameters('vnetBastionName')]",
-      "location": "westus",
+      "location": "[parameters('location')]",
       "properties": {
 	    "addressSpace": {
 		  "addressPrefixes": [
@@ -429,7 +431,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2023-04-01",
       "name": "[parameters('ipBastionName')]",
-      "location": "westus",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
       ],	  
@@ -443,29 +445,13 @@
 		"publicIPAllocationMethod": "Static"
 	  }
     },
-	{
-		"type": "Microsoft.Network/bastionHosts",
-		"apiVersion": "2023-09-01",
-		"name": "[parameters('bastionName')]",
-		"location": "westus",
-		"dependsOn": [
-		  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetBastionName'))]"
-		],
-		"sku": {
-		  "name": "Developer"
-		},
-		"properties": {
-		  "virtualNetwork": {
-			"id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName'))]"
-		  }
-		}
-	},
+
 
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2018-11-01",
       "name": "[concat(parameters('vmName'), '-nic')]",
-      "location": "westus",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetAName'))]"
       ],		  
@@ -486,7 +472,7 @@
 	  "type": "Microsoft.Compute/virtualMachines",
 	  "apiVersion": "2021-03-01",
 	  "name": "[parameters('vmName')]",
-	  "location": "westus",
+	  "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetAName'))]"
       ],	  
@@ -558,6 +544,7 @@
 		}
 	  }
 	},
+
     {
       "name": "[parameters('acrName')]",
       "type": "Microsoft.ContainerRegistry/registries",
