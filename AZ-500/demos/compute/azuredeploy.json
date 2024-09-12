@@ -75,7 +75,7 @@
   },
   "variables": {
     "nicName": "[concat(parameters('vmName'), '-nic')]",
-	"snetName": "[concat(parameters('vnetBastionName'), '/', parameters('snetBastionName'))]"
+	"snetName": "[concat(parameters('vnetBastionName'), '/subnets/', parameters('snetBastionName'))]"
   },
   "resources": [
     {
