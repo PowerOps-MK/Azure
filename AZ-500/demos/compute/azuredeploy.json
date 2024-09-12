@@ -74,8 +74,7 @@
 	}	
   },
   "variables": {
-    "nicName": "[concat(parameters('vmName'), '-nic')]",
-	"snetName": "[concat(parameters('vnetBastionName'), '/subnets/', parameters('snetBastionName'))]"
+    "nicName": "[concat(parameters('vmName'), '-nic')]"
   },
   "resources": [
     {
@@ -138,7 +137,7 @@
 	  "name": "[parameters('bastionName')]",
 	  "location": "[parameters('location')]",
 	  "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('snetName'))]",
+        "[format('{0}/subnets/AzureBastionSubnet', resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName')))]",
 		"[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipBastionName'))]"
 	  ],
 	  "sku": {
@@ -151,7 +150,7 @@
             "properties": {
 			  "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('snetName'))]"
+                "id": "[format('{0}/subnets/AzureBastionSubnet', resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName')))]"
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipBastionName'))]"
