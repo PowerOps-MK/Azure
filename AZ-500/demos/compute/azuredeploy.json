@@ -157,7 +157,8 @@
 	  "name": "[parameters('vmName')]",
 	  "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetAName'))]"
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetBastionName'), parameters('snetAName'))]",
+		"[resourceId('Microsoft.Network/networkInterfaces', parameters('vmName'), '-nic')]"
       ],	  
  	  "properties": {
 		"hardwareProfile": {
