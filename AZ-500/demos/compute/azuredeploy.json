@@ -75,7 +75,7 @@
   },
   "variables": {
     "nicName": "[concat(parameters('vmName'), '-nic')]",
-	"snetName": "[concat(parameters('vnetBastionName'), '/', parameters('snetBastionName'))]",
+	"snetName": "[concat(parameters('vnetBastionName'), '/', parameters('snetBastionName'))]"
   },
   "resources": [
     {
@@ -147,16 +147,16 @@
 	  "properties": {
          "ipConfigurations": [
           {
+			"name": "ipconfig1", 
             "properties": {
+			  "privateIPAllocationMethod": "Dynamic",
               "subnet": {
                 "id": "[format('{0}/subnets/AzureBastionSubnet', resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName')))]"
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipBastionName'))]"
-              },
-              "privateIPAllocationMethod": "Dynamic"
-            },
-            "name": "ipconfig1"
+              }
+            }
           }
         ]
       }
