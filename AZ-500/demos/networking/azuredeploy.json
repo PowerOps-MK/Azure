@@ -274,7 +274,8 @@
 	  "name": "[parameters('gwName')]",
 	  "location": "[parameters('location')]",
 	  "dependsOn": [
-		"[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetGWName'))]"
+		"[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetGWName'), parameters('snetGWName'))]",
+		"[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipGWName'))]"
 	  ],
 	  "properties": {
 		"vpnType": "RouteBased",
