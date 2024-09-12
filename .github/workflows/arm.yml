@@ -61,5 +61,5 @@ jobs:
         uses: azure/arm-deploy@65ae74fb7aec7c680c88ef456811f353adae4d06 #v1.0.9
         with:
           resourceGroupName: ${{ env.RG }}
-          template: ${{ env.FOLDER }}/azuredeploy.json
+          template: ${{ env.FOLDER }}/networking/azuredeploy.json
           # parameters: ${{ env.FOLDER }}/azuredeploy.parameters.json
