@@ -141,7 +141,7 @@
       "properties": {
 	    "minimalTlsVersion": "1.2",
 		"administratorLogin": "johndoe",
-        "administratorLoginPassword": "supersecuretestpassword9889@@@",
+        "administratorLoginPassword": "supersecuretestpassword9889@@@"
       }
     },
     {
