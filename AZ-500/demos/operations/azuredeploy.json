@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "kvName": {
+      "type": "string",
+      "defaultValue": "[format('KV{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },
+    "logName": {
+      "type": "string",
+      "defaultValue": "[format('LOG{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "works with West US"
+      }
+    },
+	"tenantId": {
+	  "type": "string",
+	  "defaultValue": "[subscription().tenantId]",
+	  "metadata": {
+  	    "description": "works with Visual Studio Enterprise"
+	  }
+	}	
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.KeyVault/vaults",
+	  "apiVersion": "2023-07-01",
+      "name": "[parameters('kvName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "enableSoftDelete": false,
+		"enableRbacAuthorization": true,
+		"tenantId": "[parameters('tenantId')]",
+        "sku": {
+          "name": "Standard",
+          "family": "A"
+        }
+      }
+    },
+    {
+	  "type": "Microsoft.OperationalInsights/workspaces",
+	  "apiVersion": "2022-10-01",
+	  "name": "[parameters('logName')]",
+      "location": "[parameters('location')]",
+	  "properties": {
+	    "sku": {
+		  "name": "pergb2018"
+		}
+	  }
+	}
+  ],
+  "outputs": {}
+}
