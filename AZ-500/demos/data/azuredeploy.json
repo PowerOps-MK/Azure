@@ -150,7 +150,7 @@
       "name": "[concat(parameters('sqlName'), '/', parameters('dbName'))]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Sql/servers', parameters('sqlServer').serverName)]"
+        "[resourceId('Microsoft.Sql/servers', parameters('sqlName'))]"
       ],	  
       "sku": {
         "name": "GP_S_Gen5_2",
