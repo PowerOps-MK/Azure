@@ -138,7 +138,7 @@
 	  "name": "[parameters('bastionName')]",
 	  "location": "[parameters('location')]",
 	  "dependsOn": [
-        "[format('{0}/subnets/AzureBastionSubnet', resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName')))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('snetName'))]",
 		"[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipBastionName'))]"
 	  ],
 	  "sku": {
@@ -151,7 +151,7 @@
             "properties": {
 			  "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[format('{0}/subnets/AzureBastionSubnet', resourceId('Microsoft.Network/virtualNetworks', parameters('vnetBastionName')))]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('snetName'))]"
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('ipBastionName'))]"
