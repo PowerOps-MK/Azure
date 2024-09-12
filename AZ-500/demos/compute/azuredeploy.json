@@ -9,6 +9,13 @@
         "description": "Specifies the name of the Azure Storage account."
       }
     },	  
+    "vmName": {
+      "type": "string",
+      "defaultValue": "[format('VM{0}', uniqueString(resourceGroup().id))]",
+      "metadata": {
+        "description": "Specifies the name of the Azure Storage account."
+      }
+    },	
     "vnetBastionName": {
       "type": "string",
       "defaultValue": "[format('vnetBastion{0}', uniqueString(resourceGroup().id))]",
