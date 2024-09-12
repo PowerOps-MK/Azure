@@ -78,7 +78,7 @@ jobs:
           resourceGroupName: ${{ env.RG }}
           template: ${{ env.FOLDER }}/oerations/azuredeploy.json
 
-                # Deploy the ARM template to Azure
+      # Deploy the ARM template to Azure
       - name: Deploy template Networking
         uses: azure/arm-deploy@65ae74fb7aec7c680c88ef456811f353adae4d06 #v1.0.9
         with:
